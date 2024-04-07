@@ -156,29 +156,29 @@ getgenv().tele = nil
 local Section = Tab:AddSection({Name = "Section"})
 
 local function UpdatePlayerList()
-    local plrlist = {}
-    for i, v in pairs(game.Players:GetPlayers()) do
-        table.insert(plrlist, v.Name)
-    end
-    return plrlist
+local plrlist = {}
+for i, v in pairs(game.Players:GetPlayers()) do
+table.insert(plrlist, v.Name)
+end
+return plrlist
 end
 
 local dr = Tab:AddDropdown({Name = "Select Player", Default = "1", Options = UpdatePlayerList(), Callback = function(v)
-    print(v)
-    getgenv().tele = v
+print(v)
+getgenv().tele = v
 end})
 
 local function RefreshPlayerList()
-    local newPlrList = UpdatePlayerList()
-    dr:Refresh(newPlrList, true)
+local newPlrList = UpdatePlayerList()
+dr:Refresh(newPlrList, true)
 end
 Tab:AddButton({Name = "Tele", Callback = function()
-    if getgenv().tele and game.Players[getgenv().tele] and game.Players[getgenv().tele].Character then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[getgenv().tele].Character.HumanoidRootPart.CFrame
-    end
+if getgenv().tele and game.Players[getgenv().tele] and game.Players[getgenv().tele].Character then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[getgenv().tele].Character.HumanoidRootPart.CFrame
+end
 end})
-while wait(1) do
-    RefreshPlayerList()
+while wait(5) do
+RefreshPlayerList()
 end
 
 OrionLib:Init()
