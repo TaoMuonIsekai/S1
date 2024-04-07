@@ -2,6 +2,8 @@ local Notif = loadstring(game:HttpGet("https://api-sirclub.onrender.com/scripts/
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "BTH", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
 local Tab = Window:MakeTab({Name = "Chỉ Số Và Skill", Icon = "rbxassetid://4483345998", PremiumOnly = false})
+local Section = Tab:AddSection({Name = "Tự Động Nâng Chỉ Số"
+ })
  Tab:AddToggle({Name = "Auto Sword", Default = false,Callback = function(z)
  getgenv().autostats = z 
  spawn(function() 
@@ -140,6 +142,8 @@ end
 end)
 end
 end})
+local Section = Tab:AddSection({Name = "Khác"
+ })
  Tab:AddButton({Name = "Load Map",Callback = function()
  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(374.444855, 260.0784, -1132.96313, -0.986770988, -0, -0.162120432, -0, 1, -0, 0.162120432, 0, -0.986770988)*CFrame.new(0, 27, 0) 
  wait(0.6) game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-972.539612, 171.965164, 375.375153, -0.352832913, -2.21926921e-08, 0.93568635, -3.1479086e-08, 1, 1.18478098e-08, -0.93568635, -2.5274252e-08, -0.352832913)*CFrame.new(0, 27, 0) 
@@ -162,7 +166,7 @@ end
 return plrlist
 end
 
-local dr = Tab:AddDropdown({Name = "Select Player", Default = "1", Options = UpdatePlayerList(), Callback = function(v)
+local dr = Tab:AddDropdown({Name = "Người Chơi", Default = "1", Options = UpdatePlayerList(), Callback = function(v)
 print(v)
 getgenv().tele = v
 end})
