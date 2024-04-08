@@ -154,7 +154,7 @@ local Section = Tab:AddSection({Name = "Khác"
  wait(0.4) game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2568.78198, 51.7689095, -56.6604958, -0.453282833, 0, 0.891366661, 0, 0.99999994, -0, -0.89136678, 0, -0.453282773)*CFrame.new(0, 14, 0) 
  wait(0.4) game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3475.6543, 66.9159241, 3698.27271, 0.816925108, 0, -0.576743841, -0, 1.00000012, -0, 0.576743841, 0, 0.816925108)*CFrame.new(0, 27, 0) 
  end})
-local Tab = Window:MakeTab({Name = "Tab 1", Icon = "rbxassetid://4483345998", PremiumOnly = false})
+local Tab = Window:MakeTab({Name = "Người Chơi", Icon = "rbxassetid://4483345998", PremiumOnly = false})
 getgenv().tele = nil
 local Section = Tab:AddSection({Name = "Section"})
 
@@ -175,11 +175,58 @@ local function RefreshPlayerList()
 local newPlrList = UpdatePlayerList()
 dr:Refresh(newPlrList, true)
 end
-Tab:AddButton({Name = "Tele", Callback = function()
+Tab:AddButton({Name = "Dịch Chuyển Vào Người Chơi", Callback = function()
 if getgenv().tele and game.Players[getgenv().tele] and game.Players[getgenv().tele].Character then
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[getgenv().tele].Character.HumanoidRootPart.CFrame
-end
+end 
 end})
+Tab:AddButton({Name = "Dồn Skill Vào Người Chơi", Callback = function()
+if getgenv().tele and game.Players[getgenv().tele] and game.Players[getgenv().tele].Character then
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[plr].Character.HumanoidRootPart.CFrame  
+  wait()  
+  for i,v in pairs(game.Players:GetDescendants()) do  
+  if v:IsA("RemoteEvent") and v.Name == "Fire" then  
+  v:FireServer()  
+  end  
+  end
+  end
+ end})
+Tab:AddToggle({Name = "Góc Nhìn Người Chơi", Default = false,Callback = function(h) 
+ getgenv().view = h 
+ spawn(function() 
+ while view do wait(3) 
+ workspace.CurrentCamera.CameraSubject = game.Players[getgenv().tele].Character 
+ if view == false then 
+ workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character 
+ end 
+ end) 
+ end 
+ end})
+   Tab:AddToggle({Name = "Bring Người Chơi", Default = false,Callback = function(a)
+  local v2 = nil
+getgenv().bri = a
+if v2 then a:Disconnect() end
+if bri ~= v2 then
+v2 = game.RunService.RenderStepped:Connect(function()
+if bri == false then v2:Disconnect() end game.Players[getgenv().tele].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -5) wait()
+sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius", math.huge)  
+  end)  
+ end 
+  end})
+ Tab:AddToggle({Name = "⭐Chém Nhanh X15", Default = false,Callback = function(z)
+ getgenv().auto2 = e 
+ for _ = 1,15 do 
+ spawn(function() 
+ while auto2 do wait() 
+ for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do 
+ if v:IsA("Tool") and v:FindFirstChild("Hitbox") then 
+ v.Hitbox:FireServer(90,90,90) 
+ end 
+ end 
+ end 
+ end) 
+ end 
+ end})
 while wait(5) do
 RefreshPlayerList()
 end
