@@ -340,4 +340,12 @@ end
 end
 end
  end})
+ Tab:AddButton({Name = "Oneshot Quái",Callback = function()
+ for i, v in pairs(game.Workspace: GetDescendants()) do
+if v.Parent.Name ~= game.Players.LocalPlayer.Name and v:IsA("Humanoid") then
+v.Health = 0
+end
+end
+sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius", math.huge)
+end})
 OrionLib:Init()
