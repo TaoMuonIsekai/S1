@@ -208,21 +208,22 @@ Tab:AddToggle({Name = "Góc Nhìn Người Chơi", Default = false,Callback = fu
  end)
  end})
   Tab:AddToggle({Name = "Hitbox Người Chơi", Default = false,Callback = function(v) 
-_G.HeadSize = 2500
+  local num = 2500
+_G.HeadSize = num
 _G.Disabled = v
 local function hit()
 if _G.Disabled then
 for i,v in next, game:GetService('Players'):GetPlayers() do
 if v.Name == getgenv().tele then
-pcall(function()
-sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius", math.huge)
+pcall(function() wait()
 v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
 v.Character.HumanoidRootPart.Transparency = 5
 v.Character.HumanoidRootPart.CanCollide = false
+sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius", math.huge)
 end)
 end
 end
-else _G.HeadSize = 0
+else num = 0
 end
 end
 game:GetService('RunService').RenderStepped:connect(hit)
@@ -230,7 +231,7 @@ end})
    Tab:AddToggle({Name = "Bring Người Chơi", Default = false,Callback = function(a)
   local v2 = nil
 getgenv().bri = a
-if v2 then a:Disconnect() end
+if v2 then v2:Disconnect() end
 if bri ~= v2 then
 v2 = game.RunService.RenderStepped:Connect(function()
 if bri == false then v2:Disconnect() end
