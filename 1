@@ -233,7 +233,7 @@ end})
 getgenv().bri = a
 if v2 then v2:Disconnect() end
 if bri ~= v2 then
-v2 = game.RunService.RenderStepped:Connect(function()
+v2 = game:GetService("RunService").RenderStepped:Connect(function()
 if bri == false then v2:Disconnect() end
 game.Players[getgenv().tele].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -5) wait()
 sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius", math.huge)  
