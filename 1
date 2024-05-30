@@ -377,9 +377,9 @@ end
 end
 end
  end})
- Tab:AddToggle({Name = "Kill Aura 500",Default = false,Callback = function(v)
+ Tab:AddToggle({Name = "Kill Aura 300",Default = false,Callback = function(v)
  getgenv().aura= v
-local dis = 500
+local dis = 300
 if getgenv().aura == nil then
 OrionLib:MakeNotification({
 	Name = "Beta Hub!",
@@ -388,7 +388,7 @@ OrionLib:MakeNotification({
 	Time = 5
 })
 else
-while aura do wait(.1)
+while aura do task.wait()
 for i, v in pairs(game:GetService("Workspace")["NPC DAMAGE"]:GetDescendants()) do
 if v:FindFirstChild("Enemy") and v.Enemy.Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude < math.random(dis) then
 pcall(function()
