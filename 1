@@ -389,7 +389,7 @@ OrionLib:MakeNotification({
 })
 else
 while aura do wait(.1)
-for i, v in pairs(game:GetService("Workspace").Npc:GetDescendants()) do
+for i, v in pairs(game:GetService("Workspace")["NPC DAMAGE"]:GetDescendants()) do
 if v:FindFirstChild("Enemy") and v.Enemy.Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude < math.random(dis) then
 pcall(function()
 v.Enemy.Health = 0
