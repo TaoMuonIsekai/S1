@@ -378,12 +378,26 @@ end
 end
  end})
  Tab:AddToggle({Name = "Oneshot Quái",Default = false,Callback = function(v)
-  getgenv().one = v
-  while one do wait(5)
- for i, v in pairs(game.Workspace: GetDescendants()) do
-if v.Parent.Name ~= game.Players.LocalPlayer.Name and v:IsA("Humanoid") and v.Health > 0 then
-v.Health = 0
+ getgenv().aura= v
+local dis = 500
+if getgenv().aura == nil then
+OrionLib:MakeNotification({
+	Name = "Beta Hub!",
+	Content = "Địt Mẹ Có Lỗi",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+else
+while aura do wait(.1)
+for i, v in pairs(game:GetService("Workspace").Npc:GetDescendants()) do
+if v:FindFirstChild("Enemy") and v.Enemy.Health > 0 and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude < math.random(dis) then
+pcall(function()
+v.Enemy.Health = 0
+v.HumanoidRootPart.CanCollide = false
+v.Enemy.WalkSpeed = 0
 sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius", math.huge)
+end)
+end
 end
 end
 end
